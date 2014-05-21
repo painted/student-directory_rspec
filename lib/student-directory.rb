@@ -9,9 +9,12 @@ def create_csv(filename)
 end
 
 def load_csv(filename)
-	CSV.foreach(filename) do |row|
-		@students = row
+	file = File.open(filename, "r")
+	file.readlines.each do |line|
+		name, cohort, email, rg = line.chomp.split(',')
+		add_student(name, cohort, email, rg)
 	end
+	file.close
 end
 
 def add_student(name, cohort, email, rg)
@@ -46,8 +49,9 @@ def write_to_csv(filename)
 	end
 end
 
-def delete_student(rg)
+def delete_student(rg, filename)
 	student_list.delete_if {|hash| hash[:rg] == rg}
+	write_to_csv(filename)
 end 
 
 
