@@ -84,3 +84,10 @@ describe 'delete students' do
 	end
 
 end
+
+describe 'interactive menu' do
+
+	it 'tells the user what options he has' do
+		expect(menu_items[0]).to eq "1) Enter the students."
+	end
+end

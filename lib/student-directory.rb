@@ -54,6 +54,8 @@ def delete_student(rg, filename)
 	write_to_csv(filename)
 end 
 
-
+def menu_items
+	items = ["1) Enter the students.", "2) Show students.", "3) Save students", "4) Delete students", "5) Load students", "9) Exit"]
+end
 
 
