@@ -16,10 +16,10 @@ describe 'load data'  do
 		load_csv("directory.csv")
 	end
 
-	it 'knows when the file is not empty' do
-		load_csv("directory.csv")
-		expect(student_list[0]).not_to be_empty
-	end
+	# it 'knows when the file is not empty' do
+	# 	load_csv("directory.csv")
+	# 	expect(student_list[0]).not_to be_empty
+	# end
 
 
 end
@@ -51,4 +51,46 @@ describe 'add student' do
 		expect(@students[0][:rg].length).to eq 10
 	end
 
+	it 'checks to make sure the first student has all above values' do
+		add_student('George', :May, 'fsggfgs@dsff.com', '1234567891')
+		expect(@students[0].values).to eq ["George", :May, "fsggfgs@dsff.com", "1234567891"]
+	end
+	it 'adds two students to the list' do
+		add_student('George', :May, 'fsggfgs@dsff.com', '1234567891')
+		add_student('John', :May, 'fsgsgss@dsff.com', '1234567890')
+		expect(@students.length).to eq 2
+	end
+end
+
+describe 'write students to csv' do
+
+	it 'writes the student list with values to the csv file' do
+		add_student('George', :May, 'fsggfgs@dsff.com', '1234567891')
+		add_student('John', :May, 'fsgsgss@dsff.com', '1234567890')
+		write_to_csv("directory.csv")
+		load_csv("directory.csv")
+		expect(student_list).to_not be_empty
+		# expect(CSV).to receive(:open).with("directory.csv", 'w')
+
+	end
+
+	# it 'knows that we do not want duplicate entries' do
+	# 	load_csv("directory.csv")
+	# 	add_student('George', :May, 'fsggfgs@dsff.com', '1234567891')
+
+end
+
+describe 'delete students' do
+
+	it 'deletes a student from the list' do
+		add_student('George', :May, 'fsggfgs@dsff.com', '1234567891')
+		add_student('John', :May, 'fsgsgss@dsff.com', '1234567890')	
+		delete_student('1234567890')
+		expect(student_list.length).to eq 1
+	end
+	# it 'deletes a student from the csv file'
+	# 	load_csv("directory.csv")
+	# 	delete_student('George')
+	# 	expect(student_list.length).to eq 1
+	# end
 end

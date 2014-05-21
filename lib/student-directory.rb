@@ -14,10 +14,8 @@ def load_csv(filename)
 	end
 end
 
-def add_student(name, cohort, email)
-	add_student_name(name)
-	add_student_cohort(cohort)
-	add_student_email(email)
+def add_student(name, cohort, email, rg)
+	student_list << {name: name, cohort: cohort, email: email, rg: rg}
 end
 
 def add_student_name(name)
@@ -39,4 +37,19 @@ end
 def add_student_id(rg)
 	student_list << {rg: rg}
 end
+
+def write_to_csv(filename)
+	CSV.open(filename, "w") do |csv|
+		@students.each do |student|
+		  csv << [student[:name], student[:cohort], student[:email], student[:rg]]
+		 end
+	end
+end
+
+def delete_student(rg)
+	student_list.delete_if {|hash| hash[:rg] == rg}
+end 
+
+
+
 
